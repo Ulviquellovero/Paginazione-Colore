@@ -8,8 +8,8 @@
         <div id='visualizzazione'>
             <?php require_once("crea_tabella.php"); ?>
         </div>
-        <button onclick="prec10Record()">Visualizza i 10 record precedenti</button>
-        <button onclick="next10Record()">Visualizza i 10 record successivi</button>
+        <button id='btnPrec' onclick="prec10Record()">Pagina Precedente</button>
+        <button id='btnNext' onclick="next10Record()">Prossima pagina</button>
     </body>
 
     <script>
@@ -20,6 +20,8 @@
             if (this.readyState == 4 && this.status == 200) 
             {
                 document.getElementById('visualizzazione').innerHTML = this.responseText;
+                verificaNext10Esistenti();
+                verificaPrec10Esistenti();
             }
           };
           var primoRecord = document.getElementById("primoRecordHidden").value;
@@ -29,6 +31,27 @@
           xhttp.send();
         }
 
+        function verificaNext10Esistenti()
+        {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) 
+            {
+                var resp = this.responseText;
+                if(resp == "false")
+                    document.getElementById("btnNext").style.visibility = "hidden";
+                else
+                    document.getElementById("btnNext").style.visibility = "visible";
+
+            }
+            };
+            var primoRecord = document.getElementById("primoRecordHidden").value;
+            var nRighe = document.getElementById("nRigheHidden").value;
+            var primoRecordNuovo = Number(primoRecord) + Number(nRighe);
+            xhttp.open("GET", "verifica_esistenza_elementi.php?primoRecord="+ primoRecordNuovo +"&nRighe="+nRighe, true);
+            xhttp.send();
+        }
+
         function prec10Record()
         {
             var xhttp = new XMLHttpRequest();
@@ -36,6 +59,8 @@
             if (this.readyState == 4 && this.status == 200) 
             {
                 document.getElementById('visualizzazione').innerHTML = this.responseText;
+                verificaPrec10Esistenti();
+                verificaNext10Esistenti();
             }
           };
           var primoRecord = document.getElementById("primoRecordHidden").value;
@@ -43,6 +68,26 @@
           var primoRecordNuovo = Number(primoRecord) - Number(nRighe);
           xhttp.open("GET", "crea_tabella.php?primoRecord="+ primoRecordNuovo +"&nRighe="+nRighe, true);
           xhttp.send();
+        }
+
+        function verificaPrec10Esistenti()
+        {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) 
+            {
+                var resp = this.responseText;
+                if(resp == "false")
+                    document.getElementById("btnPrec").style.visibility = "hidden";
+                else
+                    document.getElementById("btnPrec").style.visibility = "visible";
+            }
+            };
+            var primoRecord = document.getElementById("primoRecordHidden").value;
+            var nRighe = document.getElementById("nRigheHidden").value;
+            var primoRecordNuovo = Number(primoRecord) - Number(nRighe);
+            xhttp.open("GET", "verifica_esistenza_elementi.php?primoRecord="+ primoRecordNuovo +"&nRighe="+nRighe, true);
+            xhttp.send();
         }
     </script>
 </html>

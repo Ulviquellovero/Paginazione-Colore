@@ -2,3 +2,8 @@
 {
     padding: 1vw;
 }
+
+#btnPrec
+{
+    visibility: hidden;
+}

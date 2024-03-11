@@ -18,6 +18,7 @@
         echo "<th>Colore<th>";
         echo "<th>Codice Colore<th>";
         echo "</tr>";
+        $numRigheReali = mysqli_num_rows($res);
         while($row = mysqli_fetch_assoc($res))
         {
             echo "<tr>";
@@ -27,8 +28,8 @@
             echo "</tr>";
         }
     echo "</table>";
-    echo "<span id='numRecVis'>Numero di record visualizzati: $nRighe</span>";
-    echo "<span id='sezRecVis'>Sezione di record vsualizzata: da $primoRecord a ".($primoRecord + $nRighe)."</span>";
+    echo "<span id='numRecVis'>Numero di record massimi visualizzabili: $nRighe</span>";
+    echo "<span id='sezRecVis'>Sezione di record vsualizzata: da ".($primoRecord + 1)." a ".($primoRecord + $numRigheReali)."</span>";
     echo "<input id='nRigheHidden' type='hidden' value='$nRighe'>";
     echo "<input id='primoRecordHidden' type='hidden' value='$primoRecord'>";
 ?>
