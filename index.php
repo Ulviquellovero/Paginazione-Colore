@@ -115,6 +115,11 @@
             var primoRecord = document.getElementById("primoRecordHidden").value;
             var nRighe = document.getElementById("nRigheHidden").value;
             var primoRecordNuovo = Number(primoRecord) - Number(nRighe);
+            if(primoRecordNuovo < 0 && primoRecord != 0)
+            {
+                primoRecordNuovo = nRighe;
+                document.getElementById("primoRecordHidden").value = nRighe;
+            }
             xhttp.open("GET", "verifica_esistenza_elementi.php?primoRecord="+ primoRecordNuovo +"&nRighe="+nRighe, true);
             xhttp.send();
         }

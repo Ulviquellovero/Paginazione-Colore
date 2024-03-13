@@ -11,7 +11,9 @@
         $primoRecord = intval($_REQUEST['primoRecord']);
     }
     if($primoRecord < 0)
+    {
         echo "false";
+    }
     else
     {
         $sql = "SELECT idColore, codiceColore FROM tColore LIMIT $nRighe OFFSET $primoRecord";
