@@ -12,7 +12,7 @@
     }
     $sql = "SELECT idColore, codiceColore FROM tColore LIMIT $nRighe OFFSET $primoRecord";
     $res = mysqli_query($con, $sql);
-    echo "<table>";
+    echo "<table id='tabellaRes'>";
         echo "<tr>";
         echo "<th>Id Colore<th>";
         echo "<th>Colore<th>";

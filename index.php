@@ -12,12 +12,14 @@
         <button id='btnPrec' onclick="prec10Record()">Pagina Precedente</button>
         <button id='btnNext' onclick="next10Record()">Prossima pagina</button>
         <br><br>
-        <label for="nRighe">Righe da visualizzare per pagina:</label>
-        <select name="nRighe" id="nRighe" onchange="nRigheCambiato()">
-            <option value="10">10</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-        </select>
+        <div id='selezioneRighe'>
+            <label id='textNRighe'for="nRighe">Righe da visualizzare per pagina:</label>
+            <select id='nRighe' name="nRighe" id="nRighe" onchange="nRigheCambiato()">
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+            </select>
+        </div>
     </body>
 
     <script>
