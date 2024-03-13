@@ -28,7 +28,9 @@
             echo "</tr>";
         }
     echo "</table>";
+    echo "<br>";
     echo "<span id='numRecVis'>Numero di record massimi visualizzabili: $nRighe</span>";
+    echo "<br>";
     echo "<span id='sezRecVis'>Sezione di record vsualizzata: da ".($primoRecord + 1)." a ".($primoRecord + $numRigheReali)."</span>";
     echo "<input id='nRigheHidden' type='hidden' value='$nRighe'>";
     echo "<input id='primoRecordHidden' type='hidden' value='$primoRecord'>";

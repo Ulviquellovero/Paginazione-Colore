@@ -8,11 +8,40 @@
         <div id='visualizzazione'>
             <?php require_once("crea_tabella.php"); ?>
         </div>
+        <br>
         <button id='btnPrec' onclick="prec10Record()">Pagina Precedente</button>
         <button id='btnNext' onclick="next10Record()">Prossima pagina</button>
+        <br><br>
+        <label for="nRighe">Righe da visualizzare per pagina:</label>
+        <select name="nRighe" id="nRighe" onchange="nRigheCambiato()">
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+        </select>
     </body>
 
     <script>
+        function nRigheCambiato()
+        {
+            var selectedValue = document.getElementById("nRighe").value;
+            //document.getElementById("nRigheHidden").innerHTML(selectedValue);
+            //document.getElementById("numRecVis").innerHTML("Numero di record massimi visualizzabili: " + selectedValue);
+        
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) 
+            {
+                document.getElementById('visualizzazione').innerHTML = this.responseText;
+                verificaNext10Esistenti();
+                verificaPrec10Esistenti();
+            }
+            };
+            var primoRecord = document.getElementById("primoRecordHidden").value;
+            var nRighe = selectedValue;
+            xhttp.open("GET", "crea_tabella.php?primoRecord="+ primoRecord +"&nRighe="+nRighe, true);
+            xhttp.send();
+        }
+        
         function next10Record()
         {
             var xhttp = new XMLHttpRequest();
